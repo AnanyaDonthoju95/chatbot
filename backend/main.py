@@ -161,7 +161,7 @@ async def chat(request: ChatRequest):
 
         # Store this message for future context
         store_memory(user_id, topic="chat", full_message=user_input)
-
+        print(response)
         return {"response": response}
 
     except Exception as e:

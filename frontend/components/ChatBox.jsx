@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import { ClipLoader } from 'react-spinners';
-const BASE_URL = import.meta.env.VITE_BACKEND_URL.replace(/\/$/, '');
 
 function ChatBox() {
   const [messages, setMessages] = useState([]);
@@ -22,12 +21,11 @@ function ChatBox() {
     setLoading(true);
 
     try {
-      const res = await fetch(`${BACKEND_URL}/chat`, {
+      const res = await axios.post('http://localhost:8000/chat', {
         user_id: 'user123',
         message: input
       });
-
-      const aiMsg = { sender: 'person', text: res.data.response };
+      const aiMsg = { sender: 'IntelliBot', text: res.data.response };
       setMessages(prev => [...prev, aiMsg]);
     } catch (error) {
       console.error('Error sending message:', error);
